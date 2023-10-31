@@ -1,0 +1,51 @@
+﻿Sentiment analysis for marketing
+
+Datasets definition:
+There's a story behind every dataset and here's your opportunity to share yours.
+training data was automatically created, as opposed to having humans manual annotate tweets. In our approach, we assume that any tweet with positive emoticons, like :), were positive, and tweets with negative emoticons, like :(, were negative.
+
+Content:
+What's inside is more than just rows and columns. Make it easy for others to get started by describing how you acquired the data and what time period it represents, too.
+The data is a CSV with emoticons removed. Data file format has 6 fields:
+0 - the polarity of the tweet (0 = negative, 2 = neutral, 4 = positive)
+1 - the id of the tweet (2087)
+2 - the date of the tweet (Sat May 16 23:58:44 UTC 2009)
+3 - the query (lyx). If there is no query, then this value is NO_QUERY.
+4 - the user that tweeted (robotickilldozr)
+5 - the text of the tweet (Lyx is cool)
+
+Loading datasets:
+          Training data was automatically created, as opposed to having humans manual annotate tweets.
+Python code:
+       df = pd.read_csv('/kaggle/input/sentiment-analysis-dataset/training.1600000.processed.noemoticon.csv',delimiter=',', encoding='ISO-8859-1')
+df.head()
+
+Data Cleaning and EDA:
+       df.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1048572 entries, 0 to 1048571
+Data columns (total 6 columns):
+ #   Column              Non-Null Count    Dtype 
+---  ------              --------------    ----- 
+ 0   polarity of tweet   1048572 non-null  int64 
+ 1   id of the tweet     1048572 non-null  int64 
+ 2   date of the tweet   1048572 non-null  object
+ 3   query               1048572 non-null  object
+ 4   user                1048572 non-null  object
+ 5   text of the tweet   1048572 non-null  object
+dtypes: int64(2), object(4)
+memory usage: 48.0+ MB
+Text Preprocessing:
+stuff_to_be_removed = list(stopwords.words('english'))+list(punctuation)
+stemmer = LancasterStemmer()
+corpus = df['text'].tolist()
+print(len(corpus))
+print(corpus[0])
+Model Building:
+X = data_cleaned['text']
+y = data_cleaned['sentiment']
+
+
+
+
+
